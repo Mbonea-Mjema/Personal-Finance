@@ -42,7 +42,9 @@ getMonthData(month){
 getItem(ItemSelected){
   console.log(ItemSelected)
   var local_items = this._items
+  if(this.clicked_month){
   this.getMonthData(this.monthNames[this.clicked_month])
+  }
   var sheet=this.sheets_data
   //console.log(sheet)
   var new_sheet=[];
