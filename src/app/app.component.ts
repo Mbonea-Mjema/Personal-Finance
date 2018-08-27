@@ -13,6 +13,7 @@ Month="Month"
 constructor(private data : DataService){}
 
 monthNames=this.data.monthNames
+
 _items=this.data._items
 
 getMonthData(month){
