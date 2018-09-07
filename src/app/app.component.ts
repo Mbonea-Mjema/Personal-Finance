@@ -1,6 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { DataService } from "./services/data.service"
-
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,6 +10,8 @@ export class AppComponent {
 sheets_data:any[];
 clicked_month:number;
 Month="Month"
+item
+graph:Chart
 constructor(private data : DataService){}
 
 monthNames=this.data.monthNames
@@ -17,6 +19,7 @@ monthNames=this.data.monthNames
 _items=this.data._items
 
 getMonthData(month){
+
   this.Month=month
   var month = this.monthNames.indexOf(month)
 
@@ -37,6 +40,7 @@ getMonthData(month){
   }
   //console.log(new_sheet)
   this.sheets_data=new_sheet
+  this.graph=this.data.getChart(new_sheet)
 }
 
 getItem(ItemSelected){
@@ -62,14 +66,18 @@ getItem(ItemSelected){
 
 ngOnInit(){
 
-//setInterval(this.data.setData(this),1000);
-setInterval(()
-=>{
-//console.log(this.data.getData())
 
-},1000);
+//setInterval(this.data.setData(this),1000);
   this.data.setData(this)
   console.log(this.data.getData());
+
+
+  setInterval(()=>{
+
+
+
+
+},10000);
 }
 
 }
