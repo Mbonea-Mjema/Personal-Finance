@@ -69,6 +69,11 @@ export class DataService {
           values.push(temp)
           current_date = new_date
           temp=data[index][2];
+          if(data.length==index+1)
+          {
+            dates.push(current_date.toLocaleDateString())
+            values.push(temp)
+          }
         }
 
         }
