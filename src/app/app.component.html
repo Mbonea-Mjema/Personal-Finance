@@ -1,17 +1,25 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="cool-font"></h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <button class="btn btn-sm btn-outline-secondary">Share</button>
+      <button class="btn btn-sm btn-outline-secondary">Export</button>
+    </div>
+  </div>
+</div>
 <div >
-
   <canvas class="my-4 w-100" id="canvas" width="900" height="380"></canvas>
 </div>
 
-<h2>Expenses and Income</h2>
+<h2 [class]='Month=="August"?"cool-font animated infinite bounce delay-2s":"nothing"'>Data  </h2>
 
 <!-- <option value="one" *ngFor="let month of monthNames"  (click)="getMonthData(month)">{{month}}</option> -->
 <select id="selectMonth" class="form-control"  >
       <option  *ngFor="let item of _items " value="{{item}}" onclick="getItem(item)" > {{item}} </option>
-  </select>
+</select>
 <!--Month Infomation button  -->
 <div id="month-dropdown" class="btn-group">
-  <button type="button" class="btn btn-info"> {{Month}} </button>
+  <button type="button " class="btn btn-info"> {{Month}} </button>
   <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="sr-only">Toggle Dropdown</span>
   </button>
@@ -27,7 +35,7 @@
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <div class="dropdown-menu">
-    <a class="dropdown-item" *ngFor="let item of _items" (click)="getItem(item)">{{item | uppercase}}</a>
+    <a class="dropdown-item cool-font" *ngFor="let item of _items" (click)="getItem(item)">{{item | uppercase}}</a>
   </div>
 </div>
 
@@ -43,11 +51,11 @@
       </tr>
     </thead>
     <tbody >
-      <tr *ngFor="let i of sheets_data  " >
-        <td>{{i[0] | date:'d/M/yy'}}</td>
-        <td>{{i[1]| uppercase}}</td>
+      <tr [class]='Month?"animated  slideInRight delay-2s":"nothing"'  *ngFor="let i of sheets_data  " >
+        <td class="cool-font">{{i[0] | date:'d/MM'}}</td>
+        <td class="cool-font">{{i[1]| uppercase}}</td>
         <td><i class="material-icons">{{i[3]}}</i></td>
-        <td>{{i[2] | currency:"INR" : 'symbol' : '1.0' }}</td>
+        <td [class]='i[2]>500 ?"cool-font animate hinge bounce delay-2s":"nothing"' [style.color]='i[2]>500 ?"red":"green"'>{{i[2] | currency:"INR" : 'symbol' : '1.0' }}</td>
       </tr>
     </tbody>
   </table>

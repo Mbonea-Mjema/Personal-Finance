@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
-.btn-group{
-  padding: 100px ,100px 100px,100px;
-  float:right;
- display:block;
- margin-right:0px;
- clear:left;
+@import url('https://fonts.googleapis.com/css?family=Merienda');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css");
+.btn-group {
+  padding: 100px, 100px 100px, 100px;
+  float: right;
+  display: block;
+  margin-right: 0px;
+  clear: left;
 }
-
-.table{
+.cool-font{
+  font-family: 'Merienda', cursive;
+}
+.table {
   margin-top: 10px;
 }
 
-
-#item-dropdown{
- margin-right: 100px;
+#item-dropdown {
+  margin-right: 100px;
 }

@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { DataService } from "./services/data.service"
 import { Chart } from 'chart.js';
+import Typed from 'typed.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -33,7 +34,7 @@ getMonthData(month){
   var month_index=date.getMonth()
   if(month_index==month)
     {
-    //  console.log('found')
+      console.log('found')
       new_sheet.push(old_sheet[i])
 
     }
@@ -71,6 +72,11 @@ ngOnInit(){
   this.data.setData(this)
   console.log(this.data.getData());
 
+  var typed = new Typed("h1.cool-font", {
+    strings: ["Welcome Mbonea 😊", "Dashboard"],
+    smartBackspace: false, // Default value
+    typeSpeed: 40
+  });
 
   setInterval(()=>{
 
