@@ -19,10 +19,10 @@ monthNames=this.data.monthNames
 
 _items=this.data._items
 
-getMonthData(month){
+getMonthData(temp){
 
-  this.Month=month
-  var month = this.monthNames.indexOf(month)
+  this.Month=temp
+  var month = this.monthNames.indexOf(temp)
 
   var new_sheet=[];
   this.clicked_month=month
