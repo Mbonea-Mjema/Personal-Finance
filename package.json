@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -34,6 +34,7 @@
     "zone.js": "~0.8.26"
   },
   "engines": {
+    "npm":"6.4.0",
     "node": "8.5.0",
     "yarn": "1.0.2"
   },
