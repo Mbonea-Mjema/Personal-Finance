@@ -23,103 +23,98 @@ export class DataService {
   //     var items = this._items
   //   //  for ()
   // }
-
-
-
+  
   getChart(sheet) {
-  //  console.log(sheet)
-    let data = sheet
-    let dates = []
-    let values = []
+   //  console.log(sheet)
+     let data = sheet
+     let dates = []
+     let values = []
 
-    var temp = 0;
-    let current_date: Date;
-    let new_date: Date
-    for (var index in data) {
-      if (temp==0) {
-        current_date = new Date(data[index][0])
-        if (!data[index][1].includes("ATM"))
-        temp = data[index][2];
-        continue;
-      }
-      new_date = new Date(data[index][0])
+     var temp = 0;
+     let current_date: Date;
+     let new_date: Date
+     for (var index in data) {
+       if (temp==0) {
+         current_date = new Date(data[index][0])
+         if (!data[index][1].includes("ATM"))
+         temp = data[index][2];
+         continue;
+       }
+       new_date = new Date(data[index][0])
 
-      if (!data[index][1].includes("ATM")) {
-        if (new_date.getTime() == current_date.getTime()) {
-          temp = temp + data[index][2];
-          continue
-        }
-        else {
-          if(current_date>new_date)
-          {
-           for(var bug in dates)
-             {
-                var temp_date=new Date(dates[bug])
-               if(new_date.getTime() == temp_date.getTime())
-               {
-                  values[bug]+=data[index][2]
+       if (!data[index][1].includes("ATM")) {
+         if (new_date.getTime() == current_date.getTime()) {
+           temp = temp + data[index][2];
+           continue
+         }
+         else {
+           if(current_date>new_date)
+           {
+            for(var bug in dates)
+              {
+                 var temp_date=new Date(dates[bug])
+                if(new_date.getTime() == temp_date.getTime())
+                {
+                   values[bug]+=data[index][2]
 
-               }
-             }
-             continue
+                }
+              }
+              continue
 
-          }
+           }
 
-          dates.push(current_date.toLocaleDateString())
-          values.push(temp)
-          current_date = new_date
-          temp=data[index][2];
-          if(data.length==index+1)
-          {
-            dates.push(current_date.toLocaleDateString())
-            values.push(temp)
-          }
-        }
+           dates.push(current_date.toLocaleDateString())
+           values.push(temp)
+           current_date = new_date
+           temp=data[index][2];
+         }
 
-        }
-        else {
-          continue
-      }
+         }
+         else {
+           continue
+       }
 
-    }
+     }
 
-//console.log(dates)
+ //console.log(dates)
 
 
 
-  var graph = new Chart('canvas', {
-  type: 'line',
-  data: {
-    labels: dates,
-    datasets: [
-      {
-        data: values,
-        borderColor: "#3cba9f",
-        fill: false
-      },
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Spending Pattern'
-    },
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [{
-        display: true
-      }],
-      yAxes: [{
-        display: true
-      }],
-    }
-  }
+   var graph = new Chart('canvas', {
+   type: 'line',
+   data: {
+     labels: dates,
+     datasets: [
+       {
+         data: values,
+         borderColor: "#3cba9f",
+         fill: false
+       },
+     ]
+   },
+   options: {
+     title: {
+       display: true,
+       text: 'Spending Pattern'
+     },
+     legend: {
+       display: false
+     },
+     scales: {
+       xAxes: [{
+         display: true
+       }],
+       yAxes: [{
+         display: true
+       }],
+     }
+   }
 
-});
-return graph;
-}
+ });
+ return graph;
+ }
+
+
 
 
 

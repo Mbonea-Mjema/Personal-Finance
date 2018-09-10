@@ -41,6 +41,7 @@ getMonthData(temp){
   }
 //  console.log(new_sheet)
   this.sheets_data=new_sheet
+  this.graph.destroy()
   this.graph=this.data.getChart(new_sheet)
 }
 
