@@ -23,8 +23,8 @@ export class DataService {
   //     var items = this._items
   //   //  for ()
   // }
-  
-  getChart(sheet) {
+
+  getChart(sheet,root:any="dummy") {
    //  console.log(sheet)
      let data = sheet
      let dates = []
@@ -77,13 +77,15 @@ export class DataService {
      }
 
  //console.log(dates)
-
+ root.pie_data[0]=values
+ root.pie_data[1]=dates
 
 
    var graph = new Chart('canvas', {
    type: 'line',
    data: {
      labels: dates,
+
      datasets: [
        {
          data: values,
@@ -93,6 +95,23 @@ export class DataService {
      ]
    },
    options: {
+      events: ['click'],
+     tooltips: {
+               enabled: true,
+               mode: 'single',
+               callbacks: {
+                   label: function(tooltipItems, data) {
+
+                     root.h2=tooltipItems.xLabel
+
+
+                     //console.log(this.pie_data)
+                     //console.log((tooltipItems.xLabel)
+
+                       return  '₹ ' + tooltipItems.yLabel ;
+                   }
+               }
+           },
      title: {
        display: true,
        text: 'Spending Pattern'
@@ -111,12 +130,11 @@ export class DataService {
    }
 
  });
+
+
  return graph;
+
  }
-
-
-
-
 
 
 

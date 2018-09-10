@@ -12,7 +12,10 @@ sheets_data:any[];
 clicked_month:number;
 Month="Month"
 item
+h2:string='Data'
 graph:Chart
+pie_data:any[]
+pie_chart:Chart
 constructor(private data : DataService){}
 
 monthNames=this.data.monthNames
@@ -42,8 +45,32 @@ getMonthData(temp){
 //  console.log(new_sheet)
   this.sheets_data=new_sheet
   this.graph.destroy()
-  this.graph=this.data.getChart(new_sheet)
+  this.graph=this.data.getChart(new_sheet,this)
 }
+
+
+  draw(){
+    if(this.pie_chart)
+    {
+     this.pie_chart.destroy();
+    }
+    this.pie_chart= new Chart('chart2', {
+      type: 'doughnut',
+      data : {
+        datasets: [{
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"]
+          data: [10,20,30,90]
+           }],
+             labels: [
+                 'Red',
+                 'Yellow',
+                 'Blue',
+                 this.h2
+               ]
+             }});
+console.log(this.pie_chart)
+//    console.log(data)
+  }
 
 getItem(ItemSelected){
   console.log(ItemSelected)
