@@ -58,7 +58,7 @@ getMonthData(temp){
       type: 'doughnut',
       data : {
         datasets: [{
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"]
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
           data: [10,20,30,90]
            }],
              labels: [
