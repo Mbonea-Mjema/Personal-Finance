@@ -77,8 +77,8 @@ export class DataService {
      }
 
  //console.log(dates)
- root.pie_data[0]=values
- root.pie_data[1]=dates
+//  root.pie_data[0]=values
+//  root.pie_data[1]=dates
 
 
    var graph = new Chart('canvas', {
