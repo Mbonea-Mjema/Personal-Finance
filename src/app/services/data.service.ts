@@ -23,7 +23,7 @@ export class DataService {
   //     var items = this._items
   //   //  for ()
   // }
-  
+
   getChart(sheet) {
    //  console.log(sheet)
      let data = sheet
