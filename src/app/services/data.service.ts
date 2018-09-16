@@ -38,6 +38,7 @@ export class DataService {
          current_date = new Date(data[index][0])
          if (!data[index][1].includes("ATM"))
          temp = data[index][2];
+
          continue;
        }
        new_date = new Date(data[index][0])
@@ -45,6 +46,13 @@ export class DataService {
        if (!data[index][1].includes("ATM")) {
          if (new_date.getTime() == current_date.getTime()) {
            temp = temp + data[index][2];
+
+           if(parseInt( index ) == data.length-1)
+           {
+             console.log(parseInt( index ) == data.length-1)
+             dates.push(current_date.toLocaleDateString())
+             values.push(temp)
+           }
            continue
          }
          else {
@@ -67,12 +75,20 @@ export class DataService {
            values.push(temp)
            current_date = new_date
            temp=data[index][2];
+
+           if(parseInt( index ) == data.length-1)
+           {
+             console.log(parseInt( index ) == data.length-1)
+             dates.push(current_date.toLocaleDateString())
+             values.push(temp)
+           }
+        //   console.log(data.length)
+        //   console.log(parseInt( index ))
+
          }
 
          }
-         else {
-           continue
-       }
+
 
      }
 
@@ -158,8 +174,8 @@ setData(rootObject) {
     this.sheetData = data_array;
 
     rootObject.graph = this.getChart(this.sheetData)
-    console.log("graph")
-    console.log(rootObject.graph)
+  //  console.log("graph")
+    //console.log(rootObject.graph)
 
   });
 }
