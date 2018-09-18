@@ -28,13 +28,14 @@
     "core-js": "^2.5.4",
     "express": "^4.16.3",
     "igniteui-angular": "^6.1.4",
+    "mongoose": "^5.2.15",
     "rxjs": "^6.0.0",
     "typed.js": "^2.0.9",
     "typescript": "~2.7.2",
     "zone.js": "~0.8.26"
   },
   "engines": {
-    "npm":"6.4.0",
+    "npm": "6.4.0",
     "node": "9.5.0",
     "yarn": "1.0.2"
   },

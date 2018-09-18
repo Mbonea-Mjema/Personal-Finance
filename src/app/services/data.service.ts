@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
+import {DataModel } from '../../Models/Data.model'
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,13 +18,7 @@ export class DataService {
   constructor(private http: HttpClient) {
   }
 
-  // gets the Available_items
-
-  //   getItemsAvailable() {
-  //     var temp = this.sheetData
-  //     var items = this._items
-  //   //  for ()
-  // }
+  
 
   getChart(sheet) {
    //  console.log(sheet)
@@ -33,19 +29,19 @@ export class DataService {
      var temp = 0;
      let current_date: Date;
      let new_date: Date
-     for (var index in data) {
+     for (var index of data) {
        if (temp==0) {
-         current_date = new Date(data[index][0])
-         if (!data[index][1].includes("ATM"))
-         temp = data[index][2];
+         current_date = new Date(index.date)
+         if (!index.type.includes("ATM"))
+         temp = index.amount;
 
          continue;
        }
-       new_date = new Date(data[index][0])
+       new_date = new Date(index.date)
 
-       if (!data[index][1].includes("ATM")) {
+       if (!index.type.includes("ATM")) {
          if (new_date.getTime() == current_date.getTime()) {
-           temp = temp + data[index][2];
+           temp = temp + index.amount;
 
            if(parseInt( index ) == data.length-1)
            {
@@ -63,7 +59,7 @@ export class DataService {
                  var temp_date=new Date(dates[bug])
                 if(new_date.getTime() == temp_date.getTime())
                 {
-                   values[bug]+=data[index][2]
+                   values[bug]+=index.amount
 
                 }
               }
@@ -74,7 +70,7 @@ export class DataService {
            dates.push(current_date.toLocaleDateString())
            values.push(temp)
            current_date = new_date
-           temp=data[index][2];
+           temp=index.amount;
 
            if(parseInt( index ) == data.length-1)
            {
@@ -158,9 +154,10 @@ setData(rootObject) {
   var raw_data;
   this.http.get(url).subscribe(data => {
 
-
-    temp = data;
-    // console.log(this.temp)
+ 
+    // console.log(test)
+ temp=data
+ 
     raw_data = temp;
     for (let i in temp) {
       var value = temp[i][1];
@@ -170,8 +167,20 @@ setData(rootObject) {
       //console.log(temp)
     }
 
-    rootObject.sheets_data = data_array;
-    this.sheetData = data_array;
+    // creating a data model
+    let model_array:any[]=[]
+    model_array = data_array.map((x)=>{
+    let temp = new DataModel()
+    temp.date =new Date( x[0])
+    temp.type = x[1]
+    temp.amount = x[2]
+    temp.icon = x[3]
+    return temp
+    });
+    //console.log(model_array )
+ 
+    rootObject.sheets_data = model_array;
+    this.sheetData = model_array;
 
     rootObject.graph = this.getChart(this.sheetData)
   //  console.log("graph")

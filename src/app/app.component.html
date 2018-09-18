@@ -52,10 +52,10 @@
     </thead>
     <tbody >
       <tr [class]='Month?"animated  slideInRight delay-2s":"nothing"'  *ngFor="let i of sheets_data  " >
-        <td class="cool-font">{{i[0] | date:'d/MM'}}</td>
-        <td class="cool-font">{{i[1]| uppercase}}</td>
-        <td><i class="material-icons">{{i[3]}}</i></td>
-        <td [class]='i[2]>500 ?"cool-font animate hinge bounce delay-2s":"nothing"' [style.color]='i[2]>500 ?"red":"green"'>{{i[2] | currency:"INR" : 'symbol' : '1.0' }}</td>
+        <td class="cool-font">{{i.date | date:'d/MM'}}</td>
+        <td class="cool-font">{{i.type| uppercase}}</td>
+        <td><i class="material-icons">{{i.icon}}</i></td>
+        <td [class]='i.amount>500 ?"cool-font animate hinge bounce delay-2s":"nothing"' [style.color]='i[2]>500 ?"red":"green"'>{{i.amount | currency:"INR" : 'symbol' : '1.0' }}</td>
       </tr>
     </tbody>
   </table>

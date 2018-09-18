@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from "./services/data.service"
 import { Chart } from 'chart.js';
 import Typed from 'typed.js';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +14,7 @@ export class AppComponent {
   clicked_month: number;
   Month = "Month"
   item
+  
   graph: Chart
   constructor(private data: DataService) { }
 
@@ -26,18 +29,15 @@ export class AppComponent {
 
     var new_sheet = [];
     this.clicked_month = month
-    var old_sheet = this.data.getData()
+    var old_sheet:any[] = this.data.getData()
+    
+   new_sheet= old_sheet.map((x)=>{
 
-    for (let i in old_sheet) {
-      var date = new Date(old_sheet[i][0])
-      var month_index = date.getMonth()
-      if (month_index == month) {
-        //console.log(old_sheet[i])
-        new_sheet.push(old_sheet[i])
-
-      }
-    }
-    //  console.log(new_sheet)
+       if(x.date.getMonth()==month){
+       return x;
+     }
+    }).filter(x=>x)
+    console.log(new_sheet)
     this.sheets_data = new_sheet
     this.graph.destroy()
     this.graph = this.data.getChart(new_sheet)
