@@ -30,21 +30,21 @@ export class AppComponent {
     var new_sheet = [];
     this.clicked_month = month
     var old_sheet:any[] = this.data.getData()
-    
-   new_sheet= old_sheet.map((x)=>{
 
-       if(x.date.getMonth()==month){
+   new_sheet= old_sheet.map((x)=>{
+     if(x.date.getMonth()==month){ 
        return x;
      }
     }).filter(x=>x)
-    console.log(new_sheet)
+
+   // console.log(new_sheet)
     this.sheets_data = new_sheet
     this.graph.destroy()
     this.graph = this.data.getChart(new_sheet)
   }
 
   getItem(ItemSelected) {
-    console.log(ItemSelected)
+    //console.log(ItemSelected)
     var local_items = this._items
     if (this.clicked_month) {
       this.getMonthData(this.monthNames[this.clicked_month])
@@ -52,13 +52,13 @@ export class AppComponent {
     var sheet = this.sheets_data
     //console.log(sheet)
     var new_sheet = [];
-    for (var data in sheet) {
-      var item = sheet[data][1]
-      if (item == ItemSelected) {
-        // console.log("found")
-        new_sheet.push(sheet[data])
+    new_sheet=sheet.filter(x=>{
+     if (x.type==ItemSelected)
+      {
+        return x;
       }
-    }
+    })
+    //console.log(new_sheet)
     this.sheets_data = new_sheet
   }
 
