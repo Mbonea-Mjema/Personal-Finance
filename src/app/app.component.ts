@@ -12,6 +12,7 @@ import Typed from 'typed.js';
 export class AppComponent {
   sheets_data: any[];
   clicked_month: number;
+
   Month = "Month"
   item
   
@@ -58,7 +59,7 @@ export class AppComponent {
         return x;
       }
     })
-    //console.log(new_sheet)
+    
     this.sheets_data = new_sheet
   }
 
