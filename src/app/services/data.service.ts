@@ -46,7 +46,7 @@ for (let arry of data)
       return x;
       }
     })
-    console.log(temp)
+    //console.log(temp)
     var Sum :number=0;
      for (var t of temp)
      {
@@ -54,9 +54,7 @@ for (let arry of data)
      }
     values.push(Sum)
   }
-  else{
-    console.log('false')
-  }
+  
    }
   
 
