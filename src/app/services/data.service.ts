@@ -26,70 +26,42 @@ export class DataService {
      let dates = []
      let values = []
 
-     var temp = 0;
-     let current_date: Date;
-     let new_date: Date
-     for (var index of data) {
-       if (temp==0) {
-         current_date = new Date(index.date)
-         if (!index.type.includes("ATM"))
-         temp = index.amount;
+    // remove atm values 
+     data=data.filter((x)=>{
+     if(x.type!="ATM")
+     {
+       return x;
+      }
+   })
 
-         continue;
-       }
-       new_date = new Date(index.date)
-
-       if (!index.type.includes("ATM")) {
-         if (new_date.getTime() == current_date.getTime()) {
-           temp = temp + index.amount;
-
-           if(parseInt( index ) == data.length-1)
-           {
-             console.log(parseInt( index ) == data.length-1)
-             dates.push(current_date.toLocaleDateString())
-             values.push(temp)
-           }
-           continue
-         }
-         else {
-           if(current_date>new_date)
-           {
-            for(var bug in dates)
-              {
-                 var temp_date=new Date(dates[bug])
-                if(new_date.getTime() == temp_date.getTime())
-                {
-                   values[bug]+=index.amount
-
-                }
-              }
-              continue
-
-           }
-
-           dates.push(current_date.toLocaleDateString())
-           values.push(temp)
-           current_date = new_date
-           temp=index.amount;
-
-           if(parseInt( index ) == data.length-1)
-           {
-             console.log(parseInt( index ) == data.length-1)
-             dates.push(current_date.toLocaleDateString())
-             values.push(temp)
-           }
-        //   console.log(data.length)
-        //   console.log(parseInt( index ))
-
-         }
-
-         }
-
-
+for (let arry of data)
+ {
+  if(!dates.includes(arry.date.toDateString()))
+  {
+    dates.push(arry.date.toDateString())
+    // create
+    let temp:any[] =data.filter((x)=>{
+      if(x.date.toDateString()==arry.date.toDateString())
+      {
+      return x;
+      }
+    })
+    console.log(temp)
+    var Sum :number=0;
+     for (var t of temp)
+     {
+       Sum+=t.amount
      }
+    values.push(Sum)
+  }
+  else{
+    console.log('false')
+  }
+   }
+  
 
- //console.log(dates)
-
+ console.log(dates)
+console.log(values)
 
 
    var graph = new Chart('canvas', {
