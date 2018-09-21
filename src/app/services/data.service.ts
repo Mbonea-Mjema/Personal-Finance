@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
 import {DataModel } from '../../Models/Data.model'
+import { ChartService } from './chart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,15 @@ export class DataService {
  
   graph;
   // you need to add HttpClientModule in the app.module file so this automatically creates an object for you
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private chart : ChartService) {
+  
+    
   }
 
   
 
   getChart(sheet) {
+  
    //  console.log(sheet)
      let data = sheet
      let dates = []
@@ -58,42 +62,10 @@ for (let arry of data)
    }
   
 
- //console.log(dates)
+ console.log(dates)
 //console.log(values)
+return this.chart.LineChart(dates,values)
 
-
-   var graph = new Chart('canvas', {
-   type: 'line',
-   data: {
-     labels: dates,
-     datasets: [
-       {
-         data: values,
-         borderColor: "#3cba9f",
-         fill: false
-       },
-     ]
-   },
-   options: {
-     title: {
-       display: true,
-       text: 'Spending Pattern'
-     },
-     legend: {
-       display: false
-     },
-     scales: {
-       xAxes: [{
-         display: true
-       }],
-       yAxes: [{
-         display: true
-       }],
-     }
-   }
-
- });
- return graph;
  }
 
 
@@ -124,10 +96,8 @@ setData(rootObject) {
   var raw_data;
   this.http.get(url).subscribe(data => {
 
- 
-    // console.log(test)
+     
  temp=data
- 
     raw_data = temp;
     for (let i in temp) {
       var value = temp[i][1];
