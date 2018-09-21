@@ -11,8 +11,7 @@ export class DataService {
     "July", "August", "September", "October", "November", "December"]
   _items = ['Lent', 'ATM', 'laundry', 'transport', 'food', 'shopping', 'SUSF', 'Stationery', 'Mis']
   sheetData; // stores data from  google sheets
-  Available_months;
-  Available_items;
+ 
   graph;
   // you need to add HttpClientModule in the app.module file so this automatically creates an object for you
   constructor(private http: HttpClient) {
@@ -32,7 +31,8 @@ export class DataService {
      {
        return x;
       }
-   })
+    }
+      )
 
 for (let arry of data)
  {
@@ -58,8 +58,8 @@ for (let arry of data)
    }
   
 
- console.log(dates)
-console.log(values)
+ //console.log(dates)
+//console.log(values)
 
 
    var graph = new Chart('canvas', {
