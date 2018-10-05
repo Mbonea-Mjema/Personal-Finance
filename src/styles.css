@@ -2,7 +2,10 @@
 /* css files */
 @import url("https://getbootstrap.com/docs/4.1/examples/dashboard/dashboard.css");
 @import url("https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css");
-@import url("https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css");
+@import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css");
+
+/* @import url("https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css") */
+
 
 /* JavaScript importations */
 /*

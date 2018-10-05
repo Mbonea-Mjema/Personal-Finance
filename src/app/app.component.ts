@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "./services/data.service"
 import { Chart } from 'chart.js';
+import {NgModel,NgForm} from "@angular/forms"
 import Typed from 'typed.js';
 
 
@@ -23,6 +24,7 @@ export class AppComponent {
 
   _items = this.data._items
 
+ 
   getMonthData(temp) {
 
     this.Month = temp
@@ -45,7 +47,7 @@ export class AppComponent {
   }
 
   getItem(ItemSelected) {
-    //console.log(ItemSelected)
+    console.log(ItemSelected)
     var local_items = this._items
     if (this.clicked_month) {
       this.getMonthData(this.monthNames[this.clicked_month])

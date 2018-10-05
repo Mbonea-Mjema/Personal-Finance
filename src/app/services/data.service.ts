@@ -36,7 +36,8 @@ export class DataService {
        return x;
       }
     }
-      )
+
+    )
 
 for (let arry of data)
  {
@@ -67,12 +68,6 @@ for (let arry of data)
 return this.chart.LineChart(dates,values)
 
  }
-
-
-
-
-
-
 
 // sets the data it requires a app-root Object
 setData(rootObject) {
@@ -129,6 +124,7 @@ setData(rootObject) {
   });
 }
 
+//hey can you see this
 getData() {
   return this.sheetData;
 }

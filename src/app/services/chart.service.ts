@@ -36,6 +36,7 @@ LineChart(dates,values){
           display: true
         }],
       }
+    
     }
  
   });
@@ -44,7 +45,19 @@ LineChart(dates,values){
 }
 
 PieChart(){
-  
+  new Chart('chart2', {
+    type: 'doughnut',
+    data : {
+      datasets: [{
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+        data: [10,20,30,90]
+         }],
+           labels: [
+               'Red',
+               'Yellow',
+               'Blue',
+             ]
+           }});
 }
 
 }
