@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  
   firebase: {
     apiKey: "AIzaSyCgFCTEqb_dRVFi_4W9ML4vKX7DIvIKLhQ",
     authDomain: "user-auth-21a70.firebaseapp.com",
@@ -12,6 +13,7 @@ export const environment = {
     storageBucket: "user-auth-21a70.appspot.com",
     messagingSenderId: "797972415085"
   }
+
 };
 
 /*
