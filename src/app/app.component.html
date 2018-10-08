@@ -31,6 +31,7 @@
             <p class="card-text" [style.color]="(this.data.balance>1000 )? 'green':'red' ">{{this.data.balance | currency:"INR" : 'symbol' : '1.0'  }}</p>
             </div>
             
+            
             </div>
   </div>
 <div *ngIf='!this.data.spinner' class="card text-center">
