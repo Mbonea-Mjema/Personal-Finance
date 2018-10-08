@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Chart } from 'chart.js';
 import {DataModel } from '../../Models/Data.model'
 import { ChartService } from './chart.service';
-
+import * as mment from 'moment'
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,8 @@ export class DataService {
     "July", "August", "September", "October", "November", "December"]
   _items = ['Lent', 'ATM', 'laundry', 'transport', 'food', 'shopping', 'SUSF', 'Stationery', 'Mis']
   sheetData; // stores data from  google sheets
- 
+ spinner=true
+ balance=0
   graph;
   // you need to add HttpClientModule in the app.module file so this automatically creates an object for you
   constructor(private http: HttpClient,private chart : ChartService) {
@@ -63,7 +64,7 @@ for (let arry of data)
    }
   
 
- console.log(dates)
+ //console.log(dates)
 //console.log(values)
 return this.chart.LineChart(dates,values)
 
@@ -89,11 +90,16 @@ setData(rootObject) {
 
   let data_array = [];
   var raw_data;
+   
+  
   this.http.get(url).subscribe(data => {
 
      
  temp=data
     raw_data = temp;
+    
+
+    
     for (let i in temp) {
       var value = temp[i][1];
       value = value.trim();
@@ -101,7 +107,8 @@ setData(rootObject) {
       data_array.push(temp[i])
       //console.log(temp)
     }
-
+  
+   // console.table(data_array)
     // creating a data model
     let model_array:any[]=[]
     model_array = data_array.map((x)=>{
@@ -113,19 +120,65 @@ setData(rootObject) {
     return temp
     });
     //console.log(model_array )
- 
+    
+    
+    
     rootObject.sheets_data = model_array;
+    
     this.sheetData = model_array;
-
-    rootObject.graph = this.getChart(this.sheetData)
-  //  console.log("graph")
+    this.setBalance()
+    this.Average()
+    console.log(this.balance)
+    setTimeout(()=>{
+      rootObject.graph = this.getChart(this.sheetData)
+ 
+    },1500)
+     //  console.log("graph")
     //console.log(rootObject.graph)
 
-  });
+  },(error)=>{
+alert('Check your internet connection')
+  },()=>{
+    this.spinner=false
+  }
+  );
 }
 
 //hey can you see this
 getData() {
   return this.sheetData;
+}
+
+Average(sheet=this.sheetData){
+var start=mment(sheet[1].date)
+
+var end = new Date()
+
+var diff=start.diff(end,'days')*-1
+console.log(`difference is ${diff} days!`)
+
+var spent=0
+this.sheetData.map((x)=>{
+  if(x.type!='ATM'){
+   
+    spent=spent+x.amount
+    
+  }
+  else{
+    if(x.amount<1000)
+    {
+      console.log(x.amount)
+      spent-=x.amount
+    }
+  }
+})
+console.log(`average is ${(spent/diff)*30} rupees`)
+return ((spent/diff)*30)
+}
+
+setBalance(sheet=this.sheetData){
+  sheet.map((x)=>{
+    (x.type=='ATM')?this.balance=this.balance+x.amount:this.balance=this.balance-x.amount
+   })
 }
 }

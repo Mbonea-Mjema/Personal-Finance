@@ -22,8 +22,7 @@ LineChart(dates,values){
     },
     options: {
       title: {
-        display: true,
-        text: 'Spending Pattern'
+        display: false,
       },     
       legend: {
         display: false

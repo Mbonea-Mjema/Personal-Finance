@@ -16,7 +16,8 @@ export class AppComponent {
 
   Month = "Month"
   item
-  
+  spinner:boolean=true
+
   graph: Chart
   constructor(private data: DataService) { }
 
@@ -34,12 +35,13 @@ export class AppComponent {
     this.clicked_month = month
     var old_sheet:any[] = this.data.getData()
 
-   new_sheet= old_sheet.map((x)=>{
+   new_sheet= old_sheet.filter((x)=>{
      if(x.date.getMonth()==month){ 
        return x;
      }
-    }).filter(x=>x)
-
+    })
+  
+  
    // console.log(new_sheet)
     this.sheets_data = new_sheet
     this.graph.destroy()

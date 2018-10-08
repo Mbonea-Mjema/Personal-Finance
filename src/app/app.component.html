@@ -7,10 +7,49 @@
     </div>
   </div>
 </div>
-<div  >
-  <canvas class="my-4 w-100" id="canvas" width="900" height="380"></canvas>
-  
+<div class="card-columns">
+<div class="card text-primary border-primary" style="max-width: 20rem;">
+
+    <div class="card-body">
+    <h4 class="card-title">Avearge</h4>
+    <p class="card-text">{{this.data.Average() | currency:"INR" : 'symbol' : '1.0'  }}</p>
+    </div>
+    
+    </div>
+    <div class="card text-primary border-primary" style="max-width: 20rem;">
+
+        <div class="card-body">
+        <h4 class="card-title">Daily Expenditure</h4>
+        <p class="card-text" [style.color]="(this.data.Average()/30<300 )? 'green':'red' " >{{this.data.Average()/30 | currency:"INR" : 'symbol' : '1.0'  }}</p>
+        </div>
+        
+        </div>
+        <div class="card text-primary border-primary" style="max-width: 20rem;">
+
+            <div class="card-body">
+            <h4 class="card-title">Balance</h4>
+            <p class="card-text" [style.color]="(this.data.balance>1000 )? 'green':'red' ">{{this.data.balance | currency:"INR" : 'symbol' : '1.0'  }}</p>
+            </div>
+            
+            </div>
+  </div>
+<div *ngIf='!this.data.spinner' class="card text-center">
+  <div class="card-header">
+    Spending pattern
+  </div>
+  <div  >
+    <canvas class="my-4 w-100" id="canvas" width="900" height="380"></canvas>
+  </div>
+    
 </div>
+<div  *ngIf="this.data.spinner" class="spinner">
+  <div class="rect1"></div>
+  <div class="rect2"></div>
+  <div class="rect3"></div>
+  <div class="rect4"></div>
+  <div class="rect5"></div>
+</div>
+
 <!-- <div class="card">
   <canvas class="my-4 w-100" id="canvas" width="900" height="380"></canvas>
 </div> -->
