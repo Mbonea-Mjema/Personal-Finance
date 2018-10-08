@@ -24,7 +24,6 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
-    "angularfire2": "^5.0.2",
     "chart.js": "^2.7.2",
     "chartjs": "^0.3.24",
     "core-js": "^2.5.4",
