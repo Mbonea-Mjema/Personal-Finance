@@ -19,7 +19,7 @@ export class AppComponent {
   spinner:boolean=true
 
   graph: Chart
-  constructor(private data: DataService) { }
+  constructor(public data: DataService) { }
 
   monthNames = this.data.monthNames
 
