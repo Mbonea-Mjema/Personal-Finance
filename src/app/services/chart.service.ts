@@ -39,24 +39,23 @@ LineChart(dates,values){
     }
  
   });
+ // console.log(graph)
   return graph;
  
 }
 
-PieChart(){
-  new Chart('chart2', {
+PieChart(label,data){
+ var pi =new Chart('sample', {
     type: 'doughnut',
     data : {
       datasets: [{
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
-        data: [10,20,30,90]
+         backgroundColor: ["#DECF3F","#60BD68","#F17CB0","#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9"],
+        data: data
          }],
-           labels: [
-               'Red',
-               'Yellow',
-               'Blue',
-             ]
+           labels:label
            }});
+          // console.log(pi)
+           return pi;
 }
 
 }

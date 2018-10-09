@@ -4,19 +4,19 @@ import { Chart } from 'chart.js';
 import {DataModel } from '../../Models/Data.model'
 import { ChartService } from './chart.service';
 import * as mment from 'moment'
+import { environment } from '.././../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"]
+  monthNames = environment.months
   _items = ['Lent', 'ATM', 'laundry', 'transport', 'food', 'shopping', 'SUSF', 'Stationery', 'Mis']
   sheetData; // stores data from  google sheets
  spinner=true
  balance=0
   graph;
   // you need to add HttpClientModule in the app.module file so this automatically creates an object for you
-  constructor(private http: HttpClient,private chart : ChartService) {
+  constructor(private http: HttpClient,public  chart : ChartService) {
   
     
   }
@@ -64,7 +64,7 @@ for (let arry of data)
    }
   
 
- //console.log(dates)
+// console.log(dates)
 //console.log(values)
 return this.chart.LineChart(dates,values)
 
@@ -72,7 +72,7 @@ return this.chart.LineChart(dates,values)
 
 // sets the data it requires a app-root Object
 setData(rootObject) {
-  let tag = {
+  let tag =  {
     'Lent': 'money_off',
     'ATM': 'attach_money',
     'laundry': 'donut_large',
@@ -84,10 +84,8 @@ setData(rootObject) {
     'Mis': 'check_box',
     'n': 'warning'
   }
-
   let temp;
-  let url: string = 'https://script.googleusercontent.com/macros/echo?user_content_key=64ASAhDDCbGDwtCLHqvkkd7xjPIwfef7giXV3hldi6tJtHkg0kqyyerrw2Rdh6BkmehAjzqWZCwvy3n4nB4N2BlyV2nzG1_Fm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnDm5wm8myN0NiWrrPmEMyAnQmdLe1OAJKfvTvQXAcTez2qjDb8p6nnlb6EVlPTNjZja4hoZq-IFr&lib=MYB81T8g1EhYHZEXN5SVvn3fjb9rHuhc5'
-
+  let url: string = environment.googleSheet
   let data_array = [];
   var raw_data;
    
@@ -128,9 +126,15 @@ setData(rootObject) {
     this.sheetData = model_array;
     this.setBalance()
     this.Average()
-    console.log(this.balance)
+    rootObject.Balance=this.balance
+    rootObject.Average=this.Average()
+    
+   // console.log(rootObject.pieChart)
+  //  console.log(this.balance)
     setTimeout(()=>{
-      rootObject.graph = this.getChart(this.sheetData)
+      var index = new  Date().getMonth()
+      var month = environment.months[index]
+      rootObject.getMonthData(month)
  
     },1500)
      //  console.log("graph")
@@ -155,7 +159,7 @@ var start=mment(sheet[1].date)
 var end = new Date()
 
 var diff=start.diff(end,'days')*-1
-console.log(`difference is ${diff} days!`)
+//console.log(`difference is ${diff} days!`)
 
 var spent=0
 this.sheetData.map((x)=>{
@@ -167,7 +171,7 @@ this.sheetData.map((x)=>{
   else{
     if(x.amount<1000)
     {
-      console.log(x.amount)
+     // console.log(x.amount)
       spent-=x.amount
     }
   }
@@ -181,4 +185,25 @@ setBalance(sheet=this.sheetData){
     (x.type=='ATM')?this.balance=this.balance+x.amount:this.balance=this.balance-x.amount
    })
 }
+
+pieData(sheet=this.sheetData){
+  let keys = environment.tag
+  let label=[]
+  let data= []
+  for (var value in keys)
+  {
+    var temp=sheet.filter((x)=>(x.type==value&&x.type!='ATM'))
+    var total = 0
+    temp.map((x)=>total+=x.amount)
+    if(total!=0){
+    value=value.toUpperCase()
+    label=[...label,value]
+    data=[...data,total]
+    }
+  }
+  // console.log(label)
+  // console.log(data)
+  return this.chart.PieChart(label,data)
+}
+
 }

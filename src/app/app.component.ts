@@ -13,12 +13,14 @@ import Typed from 'typed.js';
 export class AppComponent {
   sheets_data: any[];
   clicked_month: number;
-
+  Balance=0
+  Average=0
   Month = "Month"
   item
   spinner:boolean=true
 
   graph: Chart
+  pieChart:Chart
   constructor(public data: DataService) { }
 
   monthNames = this.data.monthNames
@@ -44,8 +46,13 @@ export class AppComponent {
   
    // console.log(new_sheet)
     this.sheets_data = new_sheet
+    if(this.graph){
     this.graph.destroy()
+    this.pieChart.destroy()
+    }
     this.graph = this.data.getChart(new_sheet)
+    this.pieChart = this.data.pieData(new_sheet)
+    //this.data.chart.PieChart()
   }
 
   getItem(ItemSelected) {
